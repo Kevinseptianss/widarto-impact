@@ -2,25 +2,7 @@ import { envVar } from "@/config/env-var";
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-function renderRow(label: string, value: unknown, alwaysShow = true) {
-  const isEmpty =
-    value === undefined ||
-    value === null ||
-    value === "" ||
-    (Array.isArray(value) && value.length === 0);
-
-  if (isEmpty && !alwaysShow) return "";
-
-  const displayValue = isEmpty
-    ? "-"
-    : Array.isArray(value)
-      ? value.join(", ")
-      : String(value);
-
-  return `<p><strong>${label}:</strong> ${displayValue}</p>`;
-}
-
-function formatPlainValue(value: unknown) {
+function formatValue(value: unknown) {
   if (
     value === undefined ||
     value === null ||
@@ -30,6 +12,10 @@ function formatPlainValue(value: unknown) {
     return "-";
   }
   return Array.isArray(value) ? value.join(", ") : String(value);
+}
+
+function renderRow(label: string, value: unknown) {
+  return `<p><strong>${label}:</strong><br/>${formatValue(value)}</p>`;
 }
 
 export async function POST(request: Request) {
@@ -46,88 +32,96 @@ export async function POST(request: Request) {
       },
     });
 
+    const fullName = formatValue(data.fullName);
+    const company = formatValue(data.company);
+    const investmentRange = formatValue(data.budget);
+
+    const textBody = `
+New Inquiry from Widarto Impact Website
+
+Name:
+${fullName}
+
+Role:
+${formatValue(data.role)}
+
+Company / Brand:
+${company}
+
+Based in:
+${formatValue(data.businessLocation)}
+
+Website / Social Media:
+${formatValue(data.website)}
+
+Category / Industry:
+${formatValue(data.category)}
+
+Main Market:
+${formatValue(data.primaryMarket)}
+
+Annual Revenue:
+${formatValue(data.revenueRange)}
+
+Services Needed:
+${formatValue(data.support)}
+
+Project Type:
+${formatValue(data.projectType)}
+
+We are looking to:
+${formatValue(data.wishTo)}
+
+Main Challenge:
+${formatValue(data.challenge)}
+
+Kick-off Target:
+${formatValue(data.kickOff)}
+
+Completion Target:
+${formatValue(data.completion)}
+
+Investment Range:
+${investmentRange}
+
+Email:
+${formatValue(data.email)}
+
+How They Found Us:
+${formatValue(data.source)}
+
+Submitted From:
+Widarto Impact Website Inquiry Form
+`.trim();
+
     const htmlBody = `
-      <h2>New Project Inquiry — Chat Form</h2>
-
-      <h3>About You</h3>
-      ${renderRow("Full Name", data.fullName)}
+      <h2>New Inquiry from Widarto Impact Website</h2>
+      ${renderRow("Name", data.fullName)}
       ${renderRow("Role", data.role)}
-      ${renderRow("Company / Brand Name", data.company)}
-      ${renderRow("City / Country", data.businessLocation)}
-      ${renderRow("Website or Social Media", data.website)}
-      ${renderRow("Email", data.email)}
-
-      <br/>
-      <h3>About the Brand</h3>
+      ${renderRow("Company / Brand", data.company)}
+      ${renderRow("Based in", data.businessLocation)}
+      ${renderRow("Website / Social Media", data.website)}
       ${renderRow("Category / Industry", data.category)}
-      ${renderRow("Primary Market", data.primaryMarket)}
-      ${renderRow("Annual Revenue Range", data.revenueRange)}
-
-      <br/>
-      <h3>Services</h3>
-      ${renderRow("Seeking help with", data.support)}
-
-      <br/>
-      <h3>Project Context</h3>
-      ${renderRow("This is", data.projectType)}
-      ${renderRow("Looking to", data.wishTo)}
+      ${renderRow("Main Market", data.primaryMarket)}
+      ${renderRow("Annual Revenue", data.revenueRange)}
+      ${renderRow("Services Needed", data.support)}
+      ${renderRow("Project Type", data.projectType)}
+      ${renderRow("We are looking to", data.wishTo)}
       ${renderRow("Main Challenge", data.challenge)}
-
-      <br/>
-      <h3>Timeline</h3>
-      ${renderRow("Would like to start", data.kickOff)}
-      ${renderRow("Aiming for completion", data.completion)}
-
-      <br/>
-      <h3>Investment</h3>
+      ${renderRow("Kick-off Target", data.kickOff)}
+      ${renderRow("Completion Target", data.completion)}
       ${renderRow("Investment Range", data.budget)}
-      ${renderRow("Investment Scope Note", data.budgetDetail)}
-
-      <br/>
-      <h3>Source</h3>
-      ${renderRow("Found through", data.source)}
+      ${renderRow("Email", data.email)}
+      ${renderRow("How They Found Us", data.source)}
+      <p><strong>Submitted From:</strong><br/>Widarto Impact Website Inquiry Form</p>
     `;
 
     const mailOptions = {
       from: `"Widarto Impact Website" <${envVar.SMTP_USER}>`,
       to: envVar.EMAIL_SEND_TO,
       replyTo: data.email,
-      subject: `Chat Project Inquiry: ${data.company || data.fullName || "New Lead"}`,
-      text: `
-New Project Inquiry — Chat Form
-
-ABOUT YOU
-Full Name: ${formatPlainValue(data.fullName)}
-Role: ${formatPlainValue(data.role)}
-Company / Brand Name: ${formatPlainValue(data.company)}
-City / Country: ${formatPlainValue(data.businessLocation)}
-Website or Social Media: ${formatPlainValue(data.website)}
-Email: ${formatPlainValue(data.email)}
-
-ABOUT THE BRAND
-Category / Industry: ${formatPlainValue(data.category)}
-Primary Market: ${formatPlainValue(data.primaryMarket)}
-Annual Revenue Range: ${formatPlainValue(data.revenueRange)}
-
-SERVICES
-Seeking help with: ${formatPlainValue(data.support)}
-
-PROJECT CONTEXT
-This is: ${formatPlainValue(data.projectType)}
-Looking to: ${formatPlainValue(data.wishTo)}
-Main Challenge: ${formatPlainValue(data.challenge)}
-
-TIMELINE
-Would like to start: ${formatPlainValue(data.kickOff)}
-Aiming for completion: ${formatPlainValue(data.completion)}
-
-INVESTMENT
-Investment Range: ${formatPlainValue(data.budget)}
-Investment Scope Note: ${formatPlainValue(data.budgetDetail)}
-
-SOURCE
-Found through: ${formatPlainValue(data.source)}
-      `.trim(),
+      subject: `New Inquiry: ${fullName} / ${company} / ${investmentRange}`,
+      text: textBody,
       html: htmlBody,
     };
 
