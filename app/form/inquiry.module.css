@@ -82,6 +82,12 @@
   line-height: 1;
 }
 
+.inlineEmoji {
+  font-size: 1em;
+  line-height: 1;
+  vertical-align: baseline;
+}
+
 .bubbleAvatar {
   flex-shrink: 0;
   width: 32px;
@@ -547,19 +553,29 @@
   .modalOverlay {
     align-items: flex-end;
     justify-content: flex-end;
-    padding: 24px 24px 88px;
+    padding: 0 18px 18px 0;
   }
 
   .modalPanel {
-    width: min(440px, calc(100vw - 48px));
-    height: min(700px, calc(100dvh - 112px));
-    max-height: calc(100dvh - 112px);
+    width: min(512px, calc(100vw - 36px));
+    height: min(700px, calc(100dvh - 36px));
+    max-height: calc(100dvh - 36px);
     border-radius: 24px;
     box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28), 0 8px 24px rgba(0, 0, 0, 0.14);
   }
 
   .modalRoot {
     padding: 20px 20px 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .modalOverlay {
+    padding-right: 32px;
+  }
+
+  .modalPanel {
+    width: min(512px, calc(100vw - 64px));
   }
 }
 

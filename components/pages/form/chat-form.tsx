@@ -102,18 +102,6 @@ function useEntranceAnimation(
 
 // ── Static data ──────────────────────────────────────────────────────────────
 
-const ROLE_OPTIONS: OptionItem[] = [
-  "Founder",
-  "Co-Founder",
-  "CEO",
-  "Brand Owner",
-  "Marketing Director",
-  "Brand Manager",
-  "Creative Director",
-  "Investor or Partner",
-  "Other",
-].map((t) => ({ title: t }));
-
 const REVENUE_OPTIONS: OptionItem[] = [
   "Pre-revenue / Under USD 500K",
   "USD 500K to 2M",
@@ -926,9 +914,8 @@ export default function InquiryPage({ variant = "page" }: InquiryPageProps) {
             { label: "My name is", placeholder: "Full Name", key: "fullName" },
             {
               label: "I'm a",
-              placeholder: "Select your role",
+              placeholder: "Your role",
               key: "role",
-              selectOptions: ROLE_OPTIONS.map((r) => r.title),
             },
             { label: "at", placeholder: "Company / Brand Name", key: "company" },
             {
@@ -1179,8 +1166,11 @@ export default function InquiryPage({ variant = "page" }: InquiryPageProps) {
 
     // Intro bubbles
     [
-      { side: "wi" as const, html: greeting, emoji: false },
-      { side: "wi" as const, html: "☺️", emoji: true },
+      {
+        side: "wi" as const,
+        html: `${greeting} <span class="${styles.inlineEmoji}">☺️</span>`,
+        emoji: false,
+      },
       {
         side: "wi" as const,
         html: "I'm Eko, Founder and Creative Director of Widarto Impact. 👋",

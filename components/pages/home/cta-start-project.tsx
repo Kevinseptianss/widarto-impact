@@ -198,7 +198,10 @@ function CTAStartProject() {
           ref={startProject}
           className="flex items-end justify-end relative h-27.5 lg:h-32 mt-13.5"
         >
-          <div ref={buttonRef} className="pb-4.5 main-padding fixed bottom-0 right-4.5 z-50 lg:right-8">
+          <div
+            ref={buttonRef}
+            className={`pb-4.5 main-padding fixed bottom-0 right-4.5 z-50 lg:right-8 transition-opacity duration-200 ${open ? "opacity-0 pointer-events-none" : ""}`}
+          >
             <button
               ref={buttonInnerRef}
               className="relative glass overflow-hidden font-graphik bg-[#ECFD01CC] text-[#121212] px-4.5 py-2 rounded-full flex items-center cursor-pointer max-h-9.5"
