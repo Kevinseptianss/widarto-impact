@@ -1,0 +1,606 @@
+/* styles/Inquiry.module.css */
+
+.page {
+  width: 100%;
+  max-width: 728px;
+  margin: 0 auto;
+  padding: 64px 24px 96px;
+  color: #111;
+  background: linear-gradient(135deg, #eef2df 0%, #f3ded7 55%, #e6efe2 100%);
+  min-height: 100vh;
+  margin-top: 0;
+  border-radius: 36px;
+}
+
+.page,
+.modalPanel,
+.modalRoot {
+  color: #111;
+}
+
+.chatWindow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #111;
+}
+
+/* ── Chat row ─────────────────────────────────────────────────────────────── */
+
+.chatRow {
+  display: flex;
+  flex-direction: column;
+}
+.wi {
+  align-items: flex-start;
+}
+.client {
+  align-items: flex-end;
+}
+
+/* ── Meta ─────────────────────────────────────────────────────────────────── */
+
+.chatMeta {
+  font-size: 12px;
+  color: rgba(17, 17, 17, 0.55);
+  margin-bottom: 6px;
+}
+.chatMeta strong {
+  color: #111;
+  font-weight: 600;
+}
+
+/* ── Bubble ───────────────────────────────────────────────────────────────── */
+
+.bubbleWrap {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.clientBubbleWrap {
+  flex-direction: row-reverse;
+}
+
+.bubble {
+  max-width: 480px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: rgba(226, 220, 214, 0.72);
+  backdrop-filter: blur(10px);
+  font-size: 16px;
+  line-height: 1.45;
+  color: #111;
+}
+.clientBubble {
+  background: rgba(226, 220, 214, 0.82);
+}
+.emojiBubble {
+  font-size: 28px;
+  padding: 18px;
+  line-height: 1;
+}
+
+.bubbleAvatar {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(226, 220, 214, 0.5);
+}
+
+.avatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Input card ───────────────────────────────────────────────────────────── */
+
+.inputCard {
+  width: min(720px, 100%);
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ── Field block ──────────────────────────────────────────────────────────── */
+
+.fieldBlock {
+  padding: 22px 28px;
+}
+
+.fieldBlock label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 17px;
+  line-height: 1.25;
+  font-weight: 500;
+  color: #111;
+}
+
+.fieldBlock input,
+.fieldBlock textarea,
+.fieldBlock select {
+  width: 100%;
+  border: 1.5px solid rgba(17, 17, 17, 0.22);
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 16px;
+  line-height: 1.35;
+  font-family: inherit;
+  color: #111;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.fieldBlock select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23111' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+.fieldBlock textarea {
+  min-height: 112px;
+  resize: vertical;
+}
+
+.fieldBlock input::placeholder,
+.fieldBlock textarea::placeholder {
+  color: rgba(17, 17, 17, 0.28);
+}
+
+.fieldBlock input:focus,
+.fieldBlock textarea:focus,
+.fieldBlock select:focus {
+  border-color: rgba(17, 17, 17, 0.5);
+}
+
+.optionalTag {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(17, 17, 17, 0.45);
+}
+
+.inputCompleted {
+  background: rgba(255, 255, 255, 0.82) !important;
+  border-color: rgba(17, 17, 17, 0.12) !important;
+}
+.inputInvalid {
+  border-color: rgba(200, 0, 0, 0.55) !important;
+  background: rgba(255, 245, 245, 0.95) !important;
+}
+
+.fieldError {
+  display: none;
+  margin-top: 7px;
+  font-size: 13px;
+  color: rgba(160, 0, 0, 0.85);
+}
+.fieldErrorVisible {
+  display: block;
+}
+
+.fieldMiniAction {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.fieldOptionList {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 0 -28px;
+  border-top: 1px solid rgba(17, 17, 17, 0.08);
+}
+
+.fieldOptionList .optionButton:first-child {
+  border-top: none;
+}
+
+.optionButtonInvalid {
+  background: rgba(255, 245, 245, 0.6);
+}
+
+/* ── Option card ──────────────────────────────────────────────────────────── */
+
+.optionLabel {
+  display: block;
+  padding: 22px 28px 18px;
+  font-size: 17px;
+  line-height: 1.3;
+  font-weight: 500;
+  color: #111;
+}
+
+.optionList {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.optionButton {
+  width: 100%;
+  border: none;
+  border-top: 1px solid rgba(17, 17, 17, 0.08);
+  background: rgba(255, 255, 255, 0.16);
+  padding: 16px 58px 16px 28px;
+  text-align: left;
+  font-size: 16px;
+  font-family: inherit;
+  cursor: pointer;
+  color: rgba(17, 17, 17, 0.62);
+  position: relative;
+  line-height: 1.35;
+  transition:
+    background 0.12s,
+    color 0.12s;
+}
+.optionButton:hover {
+  color: #111;
+  background: rgba(255, 255, 255, 0.34);
+}
+
+.optionButton::after {
+  content: "";
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(17, 17, 17, 0.25);
+  border-radius: 4px;
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.optionButtonSelected {
+  color: #111;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.optionButtonSelected::after {
+  content: "✓";
+  border-color: #111;
+  color: #111;
+  font-size: 17px;
+  line-height: 14px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.optionDesc {
+  display: block;
+  font-size: 13px;
+  color: rgba(17, 17, 17, 0.55);
+  margin-top: 4px;
+  line-height: 1.35;
+  font-weight: 400;
+}
+
+/* ── Action row ───────────────────────────────────────────────────────────── */
+
+.actionRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 28px 20px;
+  border-top: 1px solid rgba(17, 17, 17, 0.08);
+}
+.rightActions {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.okButton,
+.backButton {
+  border: none;
+  border-radius: 8px;
+  background: rgba(17, 17, 17, 0.08);
+  color: rgba(17, 17, 17, 0.62);
+  font-size: 13px;
+  padding: 7px 11px;
+  cursor: pointer;
+  font-family: inherit;
+  transition:
+    background 0.12s,
+    color 0.12s;
+}
+.okButton:hover,
+.backButton:hover {
+  background: rgba(17, 17, 17, 0.14);
+  color: #111;
+}
+
+/* ── Typing indicator ──────────────────────────────────────────────────────── */
+
+.typingWrap {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 8px;
+  margin: 6px 0 8px;
+}
+
+.typingBubble {
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: rgba(226, 220, 214, 0.72);
+  backdrop-filter: blur(10px);
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  animation: fadeUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.typingDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(17, 17, 17, 0.35);
+  animation: dotBounce 1.1s infinite ease-in-out;
+}
+
+.typingDot:nth-child(2) {
+  animation-delay: 0.18s;
+}
+.typingDot:nth-child(3) {
+  animation-delay: 0.36s;
+}
+
+@keyframes dotBounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+  30% {
+    transform: translateY(-6px);
+    opacity: 0.9;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Toast ────────────────────────────────────────────────────────────────── */
+
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: #111;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 15px;
+  opacity: 0;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+    opacity 0.35s;
+  pointer-events: none;
+  z-index: 999;
+}
+.toastVisible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+.toastError {
+  background: rgba(160, 0, 0, 0.92);
+  color: #fff;
+}
+
+.successCard {
+  margin-top: 24px;
+  padding: 28px 32px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.successTitle {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0 0 10px;
+  color: #111;
+}
+
+.successText {
+  font-size: 16px;
+  line-height: 1.45;
+  color: rgba(17, 17, 17, 0.72);
+  margin: 0;
+}
+
+/* ── Chat modal (popup / mobile fullscreen) ───────────────────────────────── */
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: transparent;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  pointer-events: none;
+}
+
+.modalPanel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  max-height: 100dvh;
+  background: linear-gradient(135deg, #eef2df 0%, #f3ded7 55%, #e6efe2 100%);
+  overflow: hidden;
+  pointer-events: auto;
+  animation: modalSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22), 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.modalHeader {
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.1);
+  background: linear-gradient(135deg, #eef2df 0%, #f3ded7 55%, #e6efe2 100%);
+  color: #111;
+}
+
+.modalTitle {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #111;
+}
+
+.modalClose {
+  flex-shrink: 0;
+  border: 1px solid rgba(17, 17, 17, 0.14);
+  background: #111;
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.modalClose:hover {
+  background: #2a2a2a;
+  transform: scale(1.04);
+}
+
+.modalBody {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalBody > * {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+}
+
+.modalRoot {
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 20px 16px 32px;
+  min-height: unset;
+  border-radius: 0;
+  background: transparent;
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .modalOverlay {
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 24px 24px 88px;
+  }
+
+  .modalPanel {
+    width: min(440px, calc(100vw - 48px));
+    height: min(700px, calc(100dvh - 112px));
+    max-height: calc(100dvh - 112px);
+    border-radius: 24px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28), 0 8px 24px rgba(0, 0, 0, 0.14);
+  }
+
+  .modalRoot {
+    padding: 20px 20px 28px;
+  }
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .page {
+    padding: 32px 16px 64px;
+  }
+  .bubble {
+    max-width: 92%;
+    font-size: 15px;
+  }
+  .inputCard {
+    width: 92%;
+  }
+
+  .fieldBlock,
+  .optionLabel,
+  .actionRow {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .fieldOptionList {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+
+  .fieldBlock label,
+  .optionLabel {
+    font-size: 16px;
+  }
+
+  .fieldBlock input,
+  .fieldBlock textarea,
+  .optionButton {
+    font-size: 15px;
+  }
+
+  .optionButton {
+    padding-right: 54px;
+  }
+}
