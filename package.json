@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && node scripts/copy-preview-launcher.mjs",
-    "build:file": "next build && node scripts/fix-file-preview.mjs && node scripts/copy-preview-launcher.mjs",
-    "export": "npm run build",
+    "build": "next build",
+    "build:static": "node scripts/build-static.mjs",
+    "build:file": "node scripts/build-static.mjs --file",
+    "export": "npm run build:static",
     "preview:serve": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/preview-server.ps1 -Root out -Port 3005",
     "start": "next start",
     "lint": "eslint"
