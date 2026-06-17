@@ -104,27 +104,27 @@
   display: block;
 }
 
-/* ── Input card (client reply forms — compact vs EKO bubbles) ─────────────── */
+/* ── Input card (client reply forms — sized to match chat bubbles) ────────── */
 
 .inputCard {
-  width: min(320px, 88%);
-  max-width: 320px;
+  width: min(400px, 92%);
+  max-width: 400px;
   padding: 0;
   overflow: hidden;
-  font-size: 14px;
-  line-height: 1.4;
+  font-size: 16px;
+  line-height: 1.45;
 }
 
 /* ── Field block ──────────────────────────────────────────────────────────── */
 
 .fieldBlock {
-  padding: 14px 16px;
+  padding: 18px 20px;
 }
 
 .fieldBlock label {
   display: block;
-  margin-bottom: 6px;
-  font-size: 14px;
+  margin-bottom: 8px;
+  font-size: 16px;
   line-height: 1.3;
   font-weight: 500;
   color: #111;
@@ -136,9 +136,9 @@
   width: 100%;
   border: 1.5px solid rgba(17, 17, 17, 0.22);
   background: rgba(255, 255, 255, 0.92);
-  border-radius: 8px;
-  padding: 10px 12px;
-  font-size: 14px;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 16px;
   line-height: 1.35;
   font-family: inherit;
   color: #111;
@@ -156,7 +156,7 @@
 }
 
 .fieldBlock textarea {
-  min-height: 80px;
+  min-height: 100px;
   resize: vertical;
 }
 
@@ -172,7 +172,7 @@
 }
 
 .optionalTag {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   color: rgba(17, 17, 17, 0.45);
 }
@@ -199,14 +199,14 @@
 .fieldMiniAction {
   display: flex;
   justify-content: flex-end;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 .fieldOptionList {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  margin: 0 -16px;
+  margin: 0 -20px;
   border-top: 1px solid rgba(17, 17, 17, 0.08);
 }
 
@@ -222,8 +222,8 @@
 
 .optionLabel {
   display: block;
-  padding: 14px 16px 10px;
-  font-size: 14px;
+  padding: 18px 20px 12px;
+  font-size: 16px;
   line-height: 1.3;
   font-weight: 500;
   color: #111;
@@ -240,9 +240,9 @@
   border: none;
   border-top: 1px solid rgba(17, 17, 17, 0.08);
   background: rgba(255, 255, 255, 0.16);
-  padding: 11px 40px 11px 16px;
+  padding: 14px 48px 14px 20px;
   text-align: left;
-  font-size: 14px;
+  font-size: 16px;
   font-family: inherit;
   cursor: pointer;
   color: rgba(17, 17, 17, 0.62);
@@ -259,12 +259,12 @@
 
 .optionButton::after {
   content: "";
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border: 2px solid rgba(17, 17, 17, 0.25);
   border-radius: 4px;
   position: absolute;
-  right: 14px;
+  right: 18px;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -279,17 +279,17 @@
   content: "✓";
   border-color: #111;
   color: #111;
-  font-size: 14px;
-  line-height: 12px;
+  font-size: 16px;
+  line-height: 14px;
   text-align: center;
   font-weight: 700;
 }
 
 .optionDesc {
   display: block;
-  font-size: 12px;
+  font-size: 13px;
   color: rgba(17, 17, 17, 0.55);
-  margin-top: 3px;
+  margin-top: 4px;
   line-height: 1.35;
   font-weight: 400;
 }
@@ -300,8 +300,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
-  padding: 10px 16px 14px;
+  gap: 12px;
+  padding: 14px 20px 18px;
   border-top: 1px solid rgba(17, 17, 17, 0.08);
 }
 .rightActions {
@@ -593,34 +593,34 @@
     font-size: 15px;
   }
   .inputCard {
-    width: min(300px, 88%);
-    max-width: 300px;
+    width: 92%;
+    max-width: 400px;
   }
 
   .fieldBlock,
   .optionLabel,
   .actionRow {
-    padding-left: 14px;
-    padding-right: 14px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .fieldOptionList {
-    margin-left: -14px;
-    margin-right: -14px;
+    margin-left: -16px;
+    margin-right: -16px;
   }
 
   .fieldBlock label,
   .optionLabel {
-    font-size: 13px;
+    font-size: 15px;
   }
 
   .fieldBlock input,
   .fieldBlock textarea,
   .optionButton {
-    font-size: 13px;
+    font-size: 15px;
   }
 
   .optionButton {
-    padding-right: 38px;
+    padding-right: 46px;
   }
 }
