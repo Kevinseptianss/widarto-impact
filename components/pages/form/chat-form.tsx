@@ -718,9 +718,13 @@ type RenderItem =
 
 type InquiryPageProps = {
   variant?: "page" | "modal";
+  theme?: "light" | "dark";
 };
 
-export default function InquiryPage({ variant = "page" }: InquiryPageProps) {
+export default function InquiryPage({
+  variant = "page",
+  theme = "light",
+}: InquiryPageProps) {
   const [formData, setFormData] = useState<Record<string, any>>(INITIAL_FORM);
   const [currentStep, setStep] = useState(0);
   const [finished, setFinished] = useState(false);
@@ -1310,7 +1314,10 @@ export default function InquiryPage({ variant = "page" }: InquiryPageProps) {
   return (
     <div
       ref={scrollContainerRef}
-      className={variant === "modal" ? styles.modalRoot : styles.page}
+      className={cx(
+        variant === "modal" ? styles.modalRoot : styles.page,
+        theme === "dark" && styles.themeDark,
+      )}
     >
       <div className={styles.chatWindow}>
         {items.map((item, idx) => {

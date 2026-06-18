@@ -6,7 +6,7 @@ import CTAStartProject from "@/components/pages/home/cta-start-project";
 export default function ConditionalCTA() {
   const pathname = usePathname();
 
-  if (pathname === "/form") {
+  if (pathname === "/form" || pathname === "/startaproject") {
     return null;
   }
 

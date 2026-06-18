@@ -582,6 +582,149 @@
   }
 }
 
+/* ── Dark theme (matches main website background) ─────────────────────────── */
+
+.themeDark {
+  background: transparent;
+  color: #fff;
+  border-radius: 0;
+}
+
+.themeDark,
+.themeDark .chatWindow {
+  color: #fff;
+}
+
+.themeDark .chatMeta {
+  color: rgba(255, 255, 255, 0.55);
+}
+.themeDark .chatMeta strong {
+  color: #fff;
+}
+
+/* Bubbles & cards */
+.themeDark .bubble {
+  background: rgba(60, 60, 60, 0.5);
+  border: 1px solid rgba(60, 60, 60, 0.4);
+  color: #fff;
+}
+.themeDark .clientBubble {
+  background: rgba(80, 80, 80, 0.55);
+}
+.themeDark .bubbleAvatar {
+  background: rgba(60, 60, 60, 0.5);
+}
+
+/* Typing indicator */
+.themeDark .typingBubble {
+  background: rgba(60, 60, 60, 0.5);
+  border: 1px solid rgba(60, 60, 60, 0.4);
+}
+.themeDark .typingDot {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+/* Field inputs */
+.themeDark .fieldBlock label {
+  color: #fff;
+}
+.themeDark .fieldBlock input,
+.themeDark .fieldBlock textarea,
+.themeDark .fieldBlock select {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+.themeDark .fieldBlock input::placeholder,
+.themeDark .fieldBlock textarea::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+.themeDark .fieldBlock input:focus,
+.themeDark .fieldBlock textarea:focus,
+.themeDark .fieldBlock select:focus {
+  border-color: rgba(255, 255, 255, 0.55);
+}
+.themeDark .fieldBlock select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.themeDark .optionalTag {
+  color: rgba(255, 255, 255, 0.45);
+}
+.themeDark .inputCompleted {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+.themeDark .inputInvalid {
+  border-color: rgba(255, 120, 120, 0.7) !important;
+  background: rgba(120, 40, 40, 0.35) !important;
+}
+.themeDark .fieldError {
+  color: rgba(255, 140, 140, 0.95);
+}
+
+/* Field divider list */
+.themeDark .fieldOptionList {
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+.themeDark .optionButtonInvalid {
+  background: rgba(120, 40, 40, 0.3);
+}
+
+/* Option cards */
+.themeDark .optionLabel {
+  color: #fff;
+}
+.themeDark .optionButton {
+  border-top-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.65);
+}
+.themeDark .optionButton:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+.themeDark .optionButton::after {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.themeDark .optionButtonSelected {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+.themeDark .optionButtonSelected::after {
+  border-color: #fff;
+  color: #fff;
+}
+.themeDark .optionDesc {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Action row & buttons */
+.themeDark .actionRow {
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+.themeDark .okButton,
+.themeDark .backButton {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+}
+.themeDark .okButton:hover,
+.themeDark .backButton:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+/* Success card */
+.themeDark .successCard {
+  background: rgba(60, 60, 60, 0.5);
+  border: 1px solid rgba(60, 60, 60, 0.4);
+}
+.themeDark .successTitle {
+  color: #fff;
+}
+.themeDark .successText {
+  color: rgba(255, 255, 255, 0.72);
+}
+
 /* ── Responsive ───────────────────────────────────────────────────────────── */
 
 @media (max-width: 768px) {
