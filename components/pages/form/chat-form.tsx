@@ -903,7 +903,7 @@ export default function InquiryPage({
 
   const fn = (formData.fullName || "there").split(" ")[0];
   const co = formData.company || "your brand";
-  const clientLabel = "You";
+  const clientLabel = (formData.fullName || "").trim() || "You";
 
   const STEPS = useMemo(
     () => [
