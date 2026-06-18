@@ -327,7 +327,7 @@ const Bubble = memo<BubbleProps>(function Bubble({
     <div ref={elRef} className={cx(styles.chatRow, styles[side])}>
       {!hideMeta && (
         <div className={styles.chatMeta}>
-          <strong>{side === "wi" ? "EKO" : clientLabel}</strong>
+          <strong>{side === "wi" ? "Eko Widarto" : clientLabel}</strong>
         </div>
       )}
       <div
@@ -903,9 +903,7 @@ export default function InquiryPage({
 
   const fn = (formData.fullName || "there").split(" ")[0];
   const co = formData.company || "your brand";
-  const clientLabel = (formData.fullName || "").trim()
-    ? formData.fullName.trim().toUpperCase()
-    : "CLIENT";
+  const clientLabel = "You";
 
   const STEPS = useMemo(
     () => [

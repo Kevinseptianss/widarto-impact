@@ -9,6 +9,11 @@ function Footer() {
   const pathname = usePathname();
   const isContactShown = pathname === "/contact";
   const isFormShown = pathname === "/form";
+
+  if (pathname === "/startaproject") {
+    return null;
+  }
+
   return (
     <>
       <footer className="px-4.5 pb-4.5 mt-5">
