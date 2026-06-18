@@ -10,6 +10,7 @@
     "export": "npm run build:static",
     "preview:serve": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/preview-server.ps1 -Root out -Port 3005",
     "start": "next start",
+    "deploy": "powershell -NoProfile -ExecutionPolicy Bypass -File ./deploy.ps1",
     "lint": "eslint"
   },
   "dependencies": {
