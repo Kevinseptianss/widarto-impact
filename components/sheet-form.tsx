@@ -299,17 +299,24 @@ function Step3({
 }) {
   const serviceOptions = [
     { value: "brand_strategy", label: "Brand Strategy" },
-    { value: "brand_naming", label: "Brand Naming" },
-    { value: "brand_identity", label: "Brand Identity" },
-    { value: "packaging_design", label: "Packaging Design" },
-    { value: "launch_assets", label: "Launch & Go-to-Market Assets" },
-    { value: "ecommerce_design", label: "eCommerce Website Design" },
     {
-      value: "content_strategy",
-      label: "Content Strategy & Creative Production",
+      value: "brand_creation",
+      label: "Brand Creation (new brand from the ground up)",
     },
-    { value: "creative_support", label: "Ongoing Creative Support" },
-    { value: "other", label: "Need something else? Tell us more." },
+    { value: "brand_identity", label: "Brand Identity" },
+    { value: "packaging_design_system", label: "Packaging Design System" },
+    {
+      value: "product_range_extension",
+      label: "Product Range Extension / Multi-SKU system",
+    },
+    { value: "launch_assets", label: "Launch & Go-to-Market Assets" },
+    { value: "brand_refresh", label: "Brand Refresh / Rebranding" },
+    { value: "repositioning", label: "Repositioning" },
+    { value: "brand_audit", label: "Brand Audit" },
+    {
+      value: "not_sure",
+      label: "Not sure yet, I need a recommendation",
+    },
   ];
 
   const selectedServices = useWatch({
@@ -386,11 +393,10 @@ function Step4({
   register: UseFormRegister<FormData>;
 }) {
   const brandStages = [
-    "A New brand",
-    "An existing brand preparing for launch",
-    "A brand refresh",
-    "A product line extension",
-    "A repositioning project",
+    "A totally new brand (startup or new venture)",
+    "An update or rebrand of an existing brand",
+    "A line extension (new SKU in an existing range)",
+    "An extension of something else (new category or market)",
   ];
 
   return (
@@ -476,12 +482,11 @@ function Step5({
   setValue: UseFormSetValue<FormData>;
 }) {
   const investmentOptions = [
-    "From USD 10,000 — Focused scope / single deliverable",
-    "USD 15,000 — USD 25,000",
-    "USD 25,000 — USD 50,000",
-    "USD 50,000 — USD 75,000",
-    "USD 75,000 — USD 100,000",
-    "USD 100,000+",
+    "USD 10,000–15,000 — Entry single or focused scope, limited SKU",
+    "USD 15,000–30,000 — Starter brand & packaging system",
+    "USD 30,000–50,000 — Growth transformation / core rebrand / refresh",
+    "USD 50,000–100,000 — Comprehensive rebrand / portfolio transformation",
+    "USD 100,000+ — Multi-category, multi-market brand system",
   ];
 
   return (
@@ -506,8 +511,13 @@ function Step5({
                   onValueChange={(val) => {
                     field.onChange(val); // Tetap update state dropdown-nya
 
-                    // Ekstrak angka minimum dari string (misal: "$15,000 to $25,000" -> "15000")
-                    const maxAmount = val.split(" ")[2].replace(/[^0-9]/g, "");
+                    // Ekstrak angka maksimum dari string (misal: "USD 10,000–15,000 — ..." -> "15000")
+                    const nums = val.match(/\d[\d,]*/g);
+                    const maxAmount = nums
+                      ? nums
+                          .map((n) => n.replace(/,/g, ""))
+                          .sort((a, b) => Number(b) - Number(a))[0]
+                      : "";
 
                     if (maxAmount) {
                       // Isi otomatis input specificInvestmentDetails

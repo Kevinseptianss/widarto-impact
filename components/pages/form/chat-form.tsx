@@ -9,6 +9,7 @@ import {
   Fragment,
   type RefObject,
 } from "react";
+import { useRouter } from "next/navigation";
 import gsap from "gsap";
 import styles from "@/app/form/inquiry.module.css";
 
@@ -112,26 +113,22 @@ const REVENUE_OPTIONS: OptionItem[] = [
 
 const SUPPORT_OPTIONS: OptionItem[] = [
   "Brand Strategy",
-  "Brand Creation",
-  "Brand Refresh / Rebranding",
-  "Repositioning",
+  "Brand Creation (new brand from the ground up)",
   "Brand Identity",
   "Packaging Design System",
-  "Product Range Extension",
+  "Product Range Extension / Multi-SKU system",
   "Launch & Go-to-Market Assets",
+  "Brand Refresh / Rebranding",
+  "Repositioning",
   "Brand Audit",
   "Not sure yet, I need a recommendation",
 ].map((t) => ({ title: t }));
 
 const PROJECT_OPTIONS: OptionItem[] = [
-  "A new brand",
-  "An existing brand preparing for launch",
-  "A brand refresh",
-  "A product line extension",
-  "A repositioning project",
-  "A packaging redesign",
-  "A portfolio or multi-SKU project",
-  "Other",
+  "A totally new brand (startup or new venture)",
+  "An update or rebrand of an existing brand",
+  "A line extension (new SKU in an existing range)",
+  "An extension of something else (new category or market)",
 ].map((t) => ({ title: t }));
 
 const KICKOFF_OPTIONS: OptionItem[] = [
@@ -149,21 +146,11 @@ const COMPLETION_OPTIONS: OptionItem[] = [
 ].map((t) => ({ title: t }));
 
 const BUDGET_OPTIONS: OptionItem[] = [
-  { title: "USD 10,000 to 15,000", desc: "Focused single-scope engagement" },
-  {
-    title: "USD 15,000 to 30,000",
-    desc: "Focused brand or packaging project, usually around 1 to 4 SKUs",
-  },
-  {
-    title: "USD 30,000 to 50,000",
-    desc: "Brand identity and packaging system, usually around 4 to 8 SKUs",
-  },
-  {
-    title: "USD 50,000 to 100,000",
-    desc: "Product range or portfolio transformation, usually around 8 to 15+ SKUs",
-  },
-  { title: "USD 100,000+", desc: "Multi-category brand system engagement" },
-  { title: "Not sure yet, but we are ready to invest in the right scope" },
+  { title: "USD 10,000–15,000", desc: "Entry single or focused scope, limited SKU" },
+  { title: "USD 15,000–30,000", desc: "Starter brand & packaging system" },
+  { title: "USD 30,000–50,000", desc: "Growth transformation / core rebrand / refresh" },
+  { title: "USD 50,000–100,000", desc: "Comprehensive rebrand / portfolio transformation" },
+  { title: "USD 100,000+", desc: "Multi-category, multi-market brand system" },
 ];
 
 const SOURCE_OPTIONS: OptionItem[] = [
@@ -730,6 +717,7 @@ export default function InquiryPage({
   const [finished, setFinished] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [wiTyping, setWiTyping] = useState(false);
+  const router = useRouter();
   const [toast, setToast] = useState({
     message: "",
     visible: false,
@@ -739,6 +727,12 @@ export default function InquiryPage({
   const update = useCallback((key: string, val: any) => {
     setFormData((p: Record<string, any>) => ({ ...p, [key]: val }));
   }, []);
+
+  useEffect(() => {
+    if (!submitted) return;
+    const t = setTimeout(() => router.push("/"), 4000);
+    return () => clearTimeout(t);
+  }, [submitted, router]);
 
   const showToast = useCallback((message: string, error: boolean = false) => {
     setToast({ message, visible: true, error });
@@ -854,32 +848,47 @@ export default function InquiryPage({
         if (!container || !el) return;
 
         const padding = 12;
+        const isContainerScrollable =
+          container.scrollHeight > container.clientHeight + 1;
+        const NAVBAR_OFFSET = isContainerScrollable ? 0 : 80;
+
         const containerRect = container.getBoundingClientRect();
         const elRect = el.getBoundingClientRect();
-        const elTop = elRect.top - containerRect.top + container.scrollTop;
+
+        const scrollTop = isContainerScrollable
+          ? container.scrollTop
+          : window.scrollY;
+        const viewportH = isContainerScrollable
+          ? container.clientHeight
+          : window.innerHeight;
+
+        const elTop =
+          elRect.top - (isContainerScrollable ? containerRect.top : 0) +
+          scrollTop;
         const elBottom = elTop + el.offsetHeight;
-        const viewTop = container.scrollTop;
-        const viewBottom = viewTop + container.clientHeight;
+        const viewTop = scrollTop;
+        const viewBottom = viewTop + viewportH;
 
         let nextScroll = viewTop;
 
         if (block === "start") {
-          nextScroll = elTop - padding;
+          nextScroll = elTop - padding - NAVBAR_OFFSET;
         } else if (block === "end") {
-          nextScroll = elBottom - container.clientHeight + padding;
+          nextScroll = elBottom - viewportH + padding;
         } else if (block === "down") {
           // Reveal-only: scroll down to expose new content, never jump back up.
           if (elBottom <= viewBottom) return;
-          nextScroll = elBottom - container.clientHeight + padding;
-        } else if (elTop < viewTop) {
-          nextScroll = elTop - padding;
+          nextScroll = elBottom - viewportH + padding;
+        } else if (elTop < viewTop + NAVBAR_OFFSET) {
+          nextScroll = elTop - padding - NAVBAR_OFFSET;
         } else if (elBottom > viewBottom) {
-          nextScroll = elBottom - container.clientHeight + padding;
+          nextScroll = elBottom - viewportH + padding;
         } else {
           return;
         }
 
-        container.scrollTo({
+        const scrollTarget = isContainerScrollable ? container : window;
+        scrollTarget.scrollTo({
           top: Math.max(0, nextScroll),
           behavior,
         });
@@ -983,7 +992,7 @@ export default function InquiryPage({
         card: (delay: number): StepCardConfig => ({
           type: "option",
           key: "card-2",
-          label: "I am seeking a partner to help me with:",
+          label: "I am seeking a partner to help me with",
           dataKey: "support",
           options: SUPPORT_OPTIONS,
           multi: true,
@@ -1071,7 +1080,7 @@ export default function InquiryPage({
       },
       {
         prompts: [
-          "And to wrap up...",
+          "Our minimum engagement starts at USD 10,000.",
           "<strong>What investment range do you have in mind for this engagement?</strong>",
         ],
         card: (delay: number): StepCardConfig => ({
@@ -1406,11 +1415,11 @@ export default function InquiryPage({
         {submitted && (
           <div className={styles.successCard}>
             <p className={styles.successTitle}>
-              Your inquiry has been received.
+              Good. That gives me enough to review the project properly.
             </p>
             <p className={styles.successText}>
-              I&apos;ll review the details and get back to you if the project
-              looks aligned.
+              I&apos;ll follow up within a few working days with suggested next
+              steps, and if it looks like the right fit, we can schedule a call.
             </p>
           </div>
         )}

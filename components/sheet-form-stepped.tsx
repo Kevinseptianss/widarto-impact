@@ -240,17 +240,23 @@ function Step3({
   const serviceOptions = [
     { value: "brand_strategy", label: "Brand Strategy" },
     {
-      value: "brand_refresh",
-      label: "Brand Refresh / Rebranding",
+      value: "brand_creation",
+      label: "Brand Creation (new brand from the ground up)",
     },
-    { value: "brand_creation", label: "Brand Creation" },
-    { value: "repositioning", label: "Repositioning" },
     { value: "brand_identity", label: "Brand Identity" },
     { value: "packaging_design_system", label: "Packaging Design System" },
-    { value: "product_range_extension", label: "Product Range Extension" },
+    {
+      value: "product_range_extension",
+      label: "Product Range Extension / Multi-SKU system",
+    },
     { value: "launch_assets", label: "Launch & Go-to-Market Assets" },
-
-    { value: "other", label: "Need something else? Tell us more." },
+    { value: "brand_refresh", label: "Brand Refresh / Rebranding" },
+    { value: "repositioning", label: "Repositioning" },
+    { value: "brand_audit", label: "Brand Audit" },
+    {
+      value: "not_sure",
+      label: "Not sure yet, I need a recommendation",
+    },
   ];
 
   const selectedServices = useWatch({
@@ -327,11 +333,10 @@ function Step4({
   register: UseFormRegister<FormData>;
 }) {
   const brandStages = [
-    "A New brand",
-    "An existing brand preparing for launch",
-    "A brand refresh",
-    "A product line extension",
-    "A repositioning project",
+    "A totally new brand (startup or new venture)",
+    "An update or rebrand of an existing brand",
+    "A line extension (new SKU in an existing range)",
+    "An extension of something else (new category or market)",
   ];
 
   return (
@@ -415,12 +420,11 @@ function Step5({
   setValue: UseFormSetValue<FormData>;
 }) {
   const investmentOptions = [
-    "USD 10,000 to 15,000 — Focused single-scope engagement",
-    "USD 15,000 to 30,000 — Focused brand or packaging project, usually around 1 to 4 SKUs  ",
-    "USD 30,000 to 50,000 — Brand identity and packaging system, usually around 4 to 8 SKUs",
-    "USD 50,000 to 100,000 — Product range or portfolio transformation, usually around 8 to 15+ SKUs",
-    "USD 100,000+ — Multi-category brand system engagement",
-    "Not sure yet, but we are ready to invest in the right scope",
+    "USD 10,000–15,000 — Entry single or focused scope, limited SKU",
+    "USD 15,000–30,000 — Starter brand & packaging system",
+    "USD 30,000–50,000 — Growth transformation / core rebrand / refresh",
+    "USD 50,000–100,000 — Comprehensive rebrand / portfolio transformation",
+    "USD 100,000+ — Multi-category, multi-market brand system",
   ];
 
   return (
@@ -443,7 +447,12 @@ function Step5({
             <GlassSelect
               onValueChange={(val) => {
                 field.onChange(val);
-                const maxAmount = val.split(" ")[2].replace(/[^0-9]/g, "");
+                const nums = val.match(/\d[\d,]*/g);
+                const maxAmount = nums
+                  ? nums
+                      .map((n) => n.replace(/,/g, ""))
+                      .sort((a, b) => Number(b) - Number(a))[0]
+                  : "";
                 if (maxAmount) {
                   setValue("specificInvestmentDetails", maxAmount, {
                     shouldValidate: true,
