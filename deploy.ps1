@@ -9,9 +9,10 @@ $ErrorActionPreference = "Stop"
 
 # ── Server config (edit here if needed) ──────────────────────────────────────
 $SshTarget = "root@187.124.233.178"
-$RemotePath = "/var/www/widarto-impact-landingpage"
+$RemotePath = "/root/widarto-impact"
 $Branch = "main"
-$DockerCompose = "docker compose"
+$Pm2AppName = "widarto-impact-new"
+$NodeBin = "/root/.nvm/versions/node/v20.20.1/bin"
 # ─────────────────────────────────────────────────────────────────────────────
 
 function Write-Step([string]$Text) {
@@ -73,9 +74,9 @@ if (-not $SkipPush) {
 if (-not $SkipDeploy) {
     Write-Step "Deploy on server via SSH"
 
-    $remoteCmd = "cd '$RemotePath' && git fetch origin && git checkout '$Branch' && git pull origin '$Branch' && $DockerCompose up -d --build --remove-orphans && $DockerCompose ps"
+    $remoteCmd = "export PATH='$NodeBin':`$PATH && cd '$RemotePath' && git fetch origin && git checkout '$Branch' && git reset --hard origin/'$Branch' && git clean -fd && npm ci && npm run build && pm2 restart '$Pm2AppName' && pm2 list"
 
-    ssh $SshTarget $remoteCmd
+    ssh $SshTarget "bash -lc `"$remoteCmd`""
     if ($LASTEXITCODE -ne 0) {
         Write-Fail "Remote deployment failed."
         exit $LASTEXITCODE
