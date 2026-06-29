@@ -76,7 +76,7 @@ if (-not $SkipDeploy) {
 
     $remoteCmd = "export PATH='$NodeBin':`$PATH && cd '$RemotePath' && git fetch origin && git checkout '$Branch' && git reset --hard origin/'$Branch' && git clean -fd && npm ci && npm run build && pm2 restart '$Pm2AppName' && pm2 list"
 
-    ssh $SshTarget "bash -lc `"$remoteCmd`""
+    ssh $SshTarget $remoteCmd
     if ($LASTEXITCODE -ne 0) {
         Write-Fail "Remote deployment failed."
         exit $LASTEXITCODE
